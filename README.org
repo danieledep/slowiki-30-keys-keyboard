@@ -60,13 +60,12 @@
     3. Download the code archive from the firmware folder
 
     4. Extract that folder and move the firmware folder to:
-       ~C:\Users\anthony\Documents\Arduino\firmware~ Substitute "danieledep" with
-       your username.
+       ~C:\Users\Username\Documents\Arduino\firmware~
 
     5. Rename the ~firmware~ folder to ~teensy32_thumb_keyboard~
 
        The full path should be:
-       ~C:\Users\anthony\Documents\Arduino\teensy32_thumb_keyboard~
+       ~C:\Users\Username\Documents\Arduino\teensy32_thumb_keyboard~
 
        And these files should exist inside there:
 
@@ -76,7 +75,7 @@
          LayoutCommon.h
          LayoutThumbKeyboard.h
          LinkedList.h
-         teensy32_thumb_keyboard.ino
+         slowiki-30-keys-keyboard.ino
        #+END_SRC
 
     6. Open
