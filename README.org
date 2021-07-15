@@ -1,76 +1,41 @@
-* teensy-thumb-keyboard
+* 30-keys-keyboard
 
-  Handheld tactile switch keyboard for Teensy 3.2 compatible boards.
+  Handheld tactile switch keyboard for Teensy 3.2 compatible boards.      
+  It consists of a modified fork of:
+  - [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard][AnthonyDiGirolamo/teensy-thumb-keyboard]]
 
-  - [[https://www.tindie.com/products/15575/][Teensy Thumb Keyboard - PCB only]] - Tindie product page and ordering
-  - [[https://hackaday.io/project/162281-teensy-thumb-keyboard][hackaday.io page]] - more photos, info and project logs
-  - [[https://www.thingiverse.com/thing:3209958][thingiverse 'HyperPixel 4 & Raspberry Pi 3 B+ Handheld' page]]
-
-*** v1.1 Photo
-    [[./images/v1.1_photo1.jpg]]
+*** v1.0 Photo
+    [[./hardware/v1.0/images/wikiboard.jpg]]
 
 ** Features
-   - 60 keys arranged in a 6x10 matrix (uses 16 pins on the microcontroller).
-   - Silkscreen has a qwerty layout with number keys arranged in a numpad.
+   - 30 keys arranged in a 3x10 matrix (uses 13 pins on the microcontroller).
+   - Silkscreen has a qwerty layout, the first row keys act as a number if pressed longer.
    - Lead free ENIG-RoHs surface finish with 2oz copper.
    - SPI, I2C, and 2 additional GPIOs broken out.
    - Each pin along the edge of the Teensy is connected to one extra pin in the
      prototyping area.
    - Beginner friendly through hole soldering.
-   - Example Arduino sketch [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/tree/master/firmware][firmware]] provided. Additional details in the [[https://hackaday.io/project/162281-teensy-thumb-keyboard/log/156138-example-firmware-posted][Example
-     Firmware Posted project log]].
    - Layout is completely customizable in the firmware.
-   - [[https://github.com/qmk/qmk_firmware][qmk_firmware]] should also work however, I don't have an example running yet.
-
-   *Three possible mounting options*
-
-   1. Teensy on the front, mounted right-side up, with usb port facing north.
-   2. Teensy on the back, mounted upside down, with usb port facing north or
-      south.
-   3. Teensy on the back, mounted upside down, with usb port facing south. Note:
-      Breakout pins will only work as expected with USB facing north.
 
 ** Parts list for a fully working keyboard
 
    - 1x [[https://www.pjrc.com/store/teensy32.html][Teensy 3.2]] or [[https://www.pjrc.com/store/teensylc.html][Teensy LC]]. A [[https://www.tindie.com/products/TleraCorp/butterfly-stm32l433-development-board/][Butterfly STM32L433]] will also work (though not
      as a USB keyboard).
    - 10x 1N4148 Zener Diodes
-   - 60x Panasonic EVQ-PAC04M Tacticle Switches. These are the quieter and higher
+   - 30x Panasonic EVQ-PAC04M Tacticle Switches. These are the quieter and higher
      quality switches. Some are available at [[https://www.digikey.com/products/en?keywords=EVQ-PAC04M][digikey]]. If you wish to use the 3d
      printed faceplate the overall switch height must be 4.3mm. These models will
      also work: EVQ-PAD04M EVQ-PAE04M EVQ-PAG04M. Otherwise any standard 6x6mm
      momentary switch will work.
 
-** Ordering
-
-   - [[https://www.tindie.com/products/15575/][Teensy Thumb Keyboard - PCB only]] Tindie product page
-   - Ordering yourself from a PCB manufacturer:
-     - https://oshpark.com instructions: upload the [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/blob/master/hardware/v1.1/teensythumbboard.kicad_pcb][kicad pcb file]] file.
-     - https://jlcpcb.com/quote instructions: upload the [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/blob/master/hardware/v1.1/plots/gerbers.zip][gerber.zip file]] The
-       settings I'd recommend are:
-       - Layers: 2
-       - Thickness: 1
-       - Surface finish: LeadFree HASL-RoHs or ENIG-RoHs (don't want lead on a
-         board you may be typing on)
-       - Copper weight: 2oz (1oz is probably fine though, the heavier weight
-         copper stands up better to repeated solder and desoldering I think)
-       - Everything else default settings.
-
-** Cases
-
-   - Keyboard Faceplate [[https://a360.co/2QAJ0Qb][Fusion 360 Public Link]]
-   - Raspberry Pi 3 B+ & HyperPixel4 Handheld [[https://a360.co/2QzHvla][Fusion 360 Public Link]]
-
 ** Firmware
 
    - The layout for USB keyboarding is defined in the ~usb_key_matrix~ variable
-     in [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/blob/master/firmware/LayoutThumbKeyboard.h#L109][LayoutThumbKeyboard.h]]
+     in [[https://github.com/danieledep/slow-wiki/blob/main/30-keys-wikiboard/firmware/LayoutThumbKeyboard.h#L109][LayoutThumbKeyboard.h]]
 
    - If you don't need a USB keyboard and are rolling your own hardware project
      then you can focus on the layout defined by the ~ascii_key_matrix~ variable
-     in [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/blob/master/firmware/LayoutThumbKeyboard.h#L74][LayoutThumbKeyboard.h]]
-
-   - There are three layers defined: base, shift, and Fn layers.
+     in [[https://github.com/danieledep/slow-wiki/blob/main/30-keys-wikiboard/firmware/LayoutThumbKeyboard.h#L74][LayoutThumbKeyboard.h]]
 
    - USB can be disabled by commenting out define ~USE_TEENSY_USB_KEYBOARD~.
 
@@ -80,9 +45,6 @@
    - If you don't need the keys to behave like a keyboard you can gut most of
      that example and just use ~key_matrix.update();~ The KeyboardMatrix class
      handles reading the button states.
-
-   - An alternative firmware option for a pure USB keyboard would be to run the
-     excellent https://github.com/qmk/qmk_firmware.
 
 *** Compiling on Windows machines
 
@@ -95,11 +57,10 @@
        Arduino*. The about window for me shows *Arduino 1.8.9* in the upper left
        and *Teensyduino 1.46* in the upper right.
 
-    3. Download the code archive from:
-       https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/archive/master.zip
+    3. Download the code archive from the firmware folder
 
     4. Extract that folder and move the firmware folder to:
-       ~C:\Users\anthony\Documents\Arduino\firmware~ Substitute "anthony" with
+       ~C:\Users\anthony\Documents\Arduino\firmware~ Substitute "danieledep" with
        your username.
 
     5. Rename the ~firmware~ folder to ~teensy32_thumb_keyboard~
@@ -112,7 +73,6 @@
        #+BEGIN_SRC text
          KeyboardMatrix.cpp
          KeyboardMatrix.h
-         LayoutAppleM0110a.h
          LayoutCommon.h
          LayoutThumbKeyboard.h
          LinkedList.h
@@ -120,7 +80,7 @@
        #+END_SRC
 
     6. Open
-       ~C:\Users\anthony\Documents\Arduino\teensy32_thumb_keyboard\teensy32_thumb_keyboard.ino~
+       ~C:\Users\User\Documents\Arduino\teensy32_thumb_keyboard\teensy32_thumb_keyboard.ino~
        in the arduino IDE.
 
     7. In the *Tools* menu select *USB Type > Serial + Keyboard + Mouse + Joystick*
@@ -133,19 +93,9 @@
          Global variables use 6680 bytes (10%) of dynamic memory, leaving 58856 bytes for local variables. Maximum is 65536 bytes.
        #+END_SRC
 
-*** Uploading the firmware without compiling
-
-    If you don't wish to compile the firmware yourself you can use the
-    precompiled hex files provided in the [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard/tree/master/firmware-compiled][firmware-compiled]] folder.
-
-    To get them loaded on a Teensy 3.2 or LC download and install the
-    [[https://www.pjrc.com/teensy/loader.html][Teensy Loader Application]] once installed plug in your teensy board and load
-    the correct firmware file:
-
-    - [[https://www.pjrc.com/store/teensy32.html][Teensy 3.2]]: ~teensy32_thumb_keyboard.ino-teensy32.hex~
-    - [[https://www.pjrc.com/store/teensylc.html][Teensy LC]]: ~teensy32_thumb_keyboard.ino-teensyLC.hex~
 
 ** Alternate Versions
 
    - [[https://github.com/AnthonyDiGirolamo/i2c-thumb-keyboard][i2c-thumb-keyboard]]
+   - [[https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard][teensy-thumb-keyboard]]
 
